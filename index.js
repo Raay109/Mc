@@ -9,7 +9,7 @@ const bot = bedrock.createClient({
 
 bot.on('spawn', (packet) =>{
 
-    console.log('spawned'),
+    console.log('erfolgreich auf den server gekommen'),
     bot.queue('text', {
         type: 'chat',
         needs_translation: false,
@@ -18,9 +18,37 @@ bot.on('spawn', (packet) =>{
         platform_chat_id: '',  // Plattform-Chat-ID (optional)
         filtered_message: '',  // Gefilterte Nachricht (optional)
         message: '/p h !raay2009'  // Nachricht, die gesendet werden soll
-    });
+    })
 });
+bot.on('text', (packet)=>{
 
+
+let message = packet.message;
+
+message = message.replace(
+/§[0-9a-fk-or]/gi, '');
+
+// Regulären Ausdruck erstellen, um den Text zwischen | und : zu extrahieren
+const regex = /\]\s*(.*?)\s*-/;
+const match = message.match(regex);
+
+if (match) {
+    const extractedText = match[1].trim(); // Extrahierter Text zwischen | und :
+    if(message.startsWith(`[Nachricht] ${extractedText} -> Du: !r`)){
+bot.queue('text', {
+    type: 'chat',
+    needs_translation: false,
+    source_name: bot.username,
+    xuid: '',
+    platform_chat_id: '',
+    filtered_message: '',
+    message: `/msg ${extractedText} hi`
+})
+    }
+} else {
+    console.log(packet);
+}
+})
 // Fehlerbehandlung und Verbindungsereignisse
 bot.on('error', (err) => {
     console.error('Error:', err);

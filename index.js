@@ -8,7 +8,6 @@ const bot = bedrock.createClient({
 })
 
 bot.on('spawn', (packet) =>{
-
     console.log('erfolgreich auf den server gekommen'),
     bot.queue('text', {
         type: 'chat',

@@ -21,6 +21,7 @@ bot.on('spawn', (packet) =>{
 });
 bot.on('text', (packet)=>{
 
+    console.log(packet)
 
 let message = packet.message;
 
@@ -32,7 +33,6 @@ const regex = /\]\s*(.*?)\s*-/;
 const match = message.match(regex);
 
 if (match) {
- console.log(packet)
     const extractedText = match[1].trim(); // Extrahierter Text zwischen | und :
     if(message.startsWith(`[Nachricht] !Raay2009 -> Du: !tpa`)){
 bot.queue('text', {

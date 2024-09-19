@@ -32,8 +32,9 @@ const regex = /\]\s*(.*?)\s*-/;
 const match = message.match(regex);
 
 if (match) {
+ console.log(packet)
     const extractedText = match[1].trim(); // Extrahierter Text zwischen | und :
-    if(message.startsWith(`[Nachricht] ${extractedText} -> Du: !r`)){
+    if(message.startsWith(`[Nachricht] !Raay2009 -> Du: !tpa`)){
 bot.queue('text', {
     type: 'chat',
     needs_translation: false,
@@ -41,11 +42,12 @@ bot.queue('text', {
     xuid: '',
     platform_chat_id: '',
     filtered_message: '',
-    message: `/msg ${extractedText} hi`
+    message: `/tpa !Raay2009`
 })
-    }
-} else {
-    console.log(packet);
+}
+
+
+
 }
 })
 // Fehlerbehandlung und Verbindungsereignisse
